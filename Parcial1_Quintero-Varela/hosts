@@ -1,0 +1,13 @@
+server_provision
+
+[broker]
+broker ansible_host=192.168.56.2
+
+[productor]
+productor ansible_host=192.168.56.3
+
+[consumidorA]
+consumidorA ansible_host=192.168.56.4
+
+[consumidorB]
+consumidorB ansible_host=192.168.56.5

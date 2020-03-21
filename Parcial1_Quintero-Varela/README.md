@@ -20,6 +20,8 @@ Implemente una arquitectura que contenga:
 - Vagrant
 - Ansible
 
+## Instalación y configuración de las máquinas virtuales
+
 ## Documentación del procedimiento para el aprovisionamiento del broker
 
 ### Evidencias del funcionamiento

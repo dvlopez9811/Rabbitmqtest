@@ -1,0 +1,35 @@
+#broker installation
+- hosts: broker
+  become: yes
+  become_user: root
+  become_method: sudo
+    
+  tasks:
+
+# productor installation
+- hosts: productor
+  gather_facts: yes
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+
+# consumidorA installation
+- hosts: consumidorA
+  gather_facts: yes
+  become: yes
+  become_user: root
+  become_method: sudo
+ 
+  tasks:
+
+# consumidorB installation
+- hosts: consumidorB
+  gather_facts: yes
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+   
