@@ -2,8 +2,14 @@
 import pika
 import sys
 
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='192.168.56.2'))
+credentials = pika.PlainCredentials('deploy', 'password')
+parameters = pika.ConnectionParameters('192.168.56.2',
+                                   5672,
+                                   '/',
+                                   credentials)
+
+connection = pika.BlockingConnection(parameters)
+
 channel = connection.channel()
 
 channel.exchange_declare(exchange='direct_logs', exchange_type='direct')

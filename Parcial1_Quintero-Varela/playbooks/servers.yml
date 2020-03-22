@@ -6,6 +6,71 @@
     
   tasks:
 
+  - name: Instalar la llave pública de RabbitMQ
+    apt_key:
+      url: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+      state: present
+      
+  - name: Agregar repositorio oficial de RabbitMQ
+    apt_repository:
+      repo: deb https://dl.bintray.com/rabbitmq/debian bionic main
+      state: present
+      filename: rabbitmq
+
+  - name: Instalar la llave pública de Erlang
+    apt_key:
+      url: http://binaries.erlang-solutions.com/debian/erlang_solutions.asc
+      state: present
+ 
+  - name: Agregar repositorio oficial de Erlang
+    apt_repository:
+      repo: deb http://binaries.erlang-solutions.com/debian bionic contrib
+      state: present
+      filename: erlang
+      
+  - name: Instalar Rabbitmq
+    apt:
+      name: "{{ item }}"
+      update_cache: yes
+      install_recommends: yes
+      state: present
+    with_items:
+      - rabbitmq-server   
+  
+  - name: Start the RabbitMQ server
+    service:
+    name: rabbitmq-server
+    state: started
+
+  - name: Start management UI
+    command: /usr/lib/rabbitmq/bin/rabbitmq-plugins enable rabbitmq_management
+  
+  - name: Enabled RabbitMQ plugins
+    rabbitmq_plugin:
+      names: rabbitmq_management
+      state: enabled
+
+  - name: Add RabbitMQ Deploy user
+    rabbitmq_user:
+      user: deploy
+      password: password
+      tags: administrator, deploy
+      vhost: /
+      configure_priv: .*
+      read_priv: .*
+      write_priv: .*
+      state: present
+
+  - name: Remove default user
+    rabbitmq_user:
+      user: guest
+      state: absent
+
+  - name: Restart RabbitMQ server
+    service:
+      name: rabbitmq-server
+      state: restarted
+
 # productor installation
 - hosts: productor
   gather_facts: yes
