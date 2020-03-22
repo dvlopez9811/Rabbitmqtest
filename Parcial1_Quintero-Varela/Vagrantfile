@@ -1,8 +1,8 @@
 servers = {
-    "broker" => { :ip => "192.168.56.2", :cpus => 1, :mem => 1024, :ssh_port=>2020 },
-    "productor" => { :ip => "192.168.56.3", :cpus => 1, :mem => 1024, :ssh_port=>2200 },
-    "consumidorA" => { :ip => "192.168.56.4", :cpus => 1, :mem => 1024, :ssh_port=>2222 },
-    "consumidorB" => { :ip => "192.168.56.5", :cpus => 1, :mem => 1024, :ssh_port=>2220 }
+    "broker" => { :ip => "192.168.56.2", :cpus => 1, :mem => 512, :ssh_port=>2020 },
+    "productor" => { :ip => "192.168.56.3", :cpus => 1, :mem => 512, :ssh_port=>2200 },
+    "consumidorA" => { :ip => "192.168.56.4", :cpus => 1, :mem => 512, :ssh_port=>2222 },
+    "consumidorB" => { :ip => "192.168.56.5", :cpus => 1, :mem => 512, :ssh_port=>2220 }
 
 }
 Vagrant.configure("2") do |config|

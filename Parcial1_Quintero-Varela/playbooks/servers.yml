@@ -80,6 +80,27 @@
 
   tasks:
 
+    - name: install pip
+      apt:
+        name: python-pip
+        state: present
+        
+    - name: install pika
+      pip: 
+        name: pika
+    
+    - name: install git
+      apt:
+        name: git
+        state: present
+    
+    - name: python archives | clone repo
+      git:
+        repo: https://github.com/dvlopez9811/Rabbitmqtest.git
+        dest: /src
+        accept_hostkey: no
+      register: git_finished
+
 # consumidorA installation
 - hosts: consumidorA
   gather_facts: yes
@@ -89,6 +110,27 @@
  
   tasks:
 
+    - name: install pip
+      apt:
+        name: python-pip
+        state: present
+        
+    - name: install pika
+      pip: 
+        name: pika
+    
+    - name: install git
+      apt:
+        name: git
+        state: present
+    
+    - name: python archives | clone repo
+      git:
+        repo: https://github.com/dvlopez9811/Rabbitmqtest.git
+        dest: /src
+        accept_hostkey: no
+      register: git_finished
+
 # consumidorB installation
 - hosts: consumidorB
   gather_facts: yes
@@ -97,4 +139,25 @@
   become_method: sudo
 
   tasks:
+
+    - name: install pip
+      apt:
+        name: python-pip
+        state: present
+        
+    - name: install pika
+      pip: 
+        name: pika
+    
+    - name: install git
+      apt:
+        name: git
+        state: present
+    
+    - name: python archives | clone repo
+      git:
+        repo: https://github.com/dvlopez9811/Rabbitmqtest.git
+        dest: /src
+        accept_hostkey: no
+      register: git_finished
    
