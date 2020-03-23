@@ -18,7 +18,7 @@ queue_name = result.method.queue
 
 severities = ["Grupo 01", "General"]
 
-f = open("mensajes.txt","a+")
+f = open("mensajes.txt","w+")
 
 for severity in severities:
     channel.queue_bind(
@@ -27,8 +27,8 @@ for severity in severities:
 print(' [*] Esperando por mensajes')
 
 def callback(ch, method, properties, body):
-    f.write(" [x] %r:%r" % (method.routing_key, body))
-   # print(" [x] %r:%r" % (method.routing_key, body))   
+   print(" [x] %r:%r" % (method.routing_key, body))   
+  # f.write(" [x] %r:%r" % (method.routing_key, body))
 
 channel.basic_consume(
     queue=queue_name, on_message_callback=callback, auto_ack=True)
