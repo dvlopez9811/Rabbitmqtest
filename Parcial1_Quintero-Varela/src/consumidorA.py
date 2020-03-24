@@ -18,17 +18,17 @@ queue_name = result.method.queue
 
 severities = ["Grupo 01", "General"]
 
-f = open("mensajes.txt","w+")
+f = open(r"/src/Parcial1_Quintero-Varela/src/mensajes.txt","a")
 
 for severity in severities:
     channel.queue_bind(
         exchange='direct_logs', queue=queue_name, routing_key=severity)
 
-print(' [*] Esperando por mensajes')
+#print(' [*] Esperando por mensajes')
 
 def callback(ch, method, properties, body):
-   print(" [x] %r:%r" % (method.routing_key, body))   
-  # f.write(" [x] %r:%r" % (method.routing_key, body))
+   #print(" [x] %r:%r" % (method.routing_key, body))   
+   f.write("\n [x] %r:%r" % (method.routing_key, body))
 
 channel.basic_consume(
     queue=queue_name, on_message_callback=callback, auto_ack=True)
