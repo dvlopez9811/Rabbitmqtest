@@ -187,6 +187,10 @@ Y el mensaje llega al Consumidor A que está vinculado al binding General.
 
 ## Documentación de las tareas de integración
 
+(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/25Integracion_status.png)
+(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/26Integracion_enviando_mensajes.png)
+(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/27Integracion_consumidorA.png)
+(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/28Integracion_consumidorB.png)
 ### Evidencias de la integración
 
 ## Problemas encontrados y las acciones efectuadas para su solución al aprovisionar la infraestructura y aplicaciones
