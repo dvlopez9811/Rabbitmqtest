@@ -101,7 +101,6 @@
         accept_hostkey: no
       register: git_finished
 
-
 # consumidorA installation
 - hosts: consumidorA
   gather_facts: yes
@@ -131,12 +130,6 @@
         dest: /src
         accept_hostkey: no
       register: git_finished
-
-    - name: Execute python consumidorA
-      shell: python /src/Parcial1_Quintero-Varela/src/consumidorA.py > /dev/null 2>&1 &
-      when: git_finished.changed
-      args:
-        chdir: /src//Parcial1_Quintero-Varela/src/
 
     - name: Give permissions python script A
       when: git_finished.changed
@@ -175,12 +168,6 @@
         dest: /src
         accept_hostkey: no
       register: git_finished
-
-    - name: Execute python consumidorB
-      shell: python /src/Parcial1_Quintero-Varela/src/consumidorB.py > /dev/null 2>&1 &
-      when: git_finished.changed
-      args:
-        chdir: /src//Parcial1_Quintero-Varela/src/
 
     - name: Give permissions python script B
       when: git_finished.changed
