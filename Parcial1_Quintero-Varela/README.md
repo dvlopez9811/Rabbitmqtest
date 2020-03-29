@@ -30,7 +30,7 @@ Como se detalla a continuación, para cumplir con la arquitectura deseada, se cr
 - Consumidor B
 - Productor
 
-![COnfiguración máquinas virtuales](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/1ConfiguracionMaquinasVirtuales.png)
+![Configuración máquinas virtuales](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/1ConfiguracionMaquinasVirtuales.png)
 
 Además, se utiliza Ansible para realizar el aprovisionamiento de las máquinas. Para ello, se define la estructura:
 
@@ -151,7 +151,39 @@ Y a su vez, el consumidor B escucha el "Grupo 02" y "General":
 
 ## Documentación del procedimiento para el aprovisionamiento del productor
 
+De parte del productor, se ejecuta el siguiente script
+
+Primero, se crea un objeto de credenciales para la metodología de autenticación predeterminada con RabbitMQ.
+
+Si no se pasa las credenciales al objeto ConnectionParameters, creará credenciales para "guest" con la contraseña de "guest".
+
+Después de pasar los parámetros necesarios, primero se crea un intercambio con el comando: 
+`{channel.exchange_declare(exchange='direct_logs', exchange_type='direct')}`
+
+Ahora, se puede enviar un mensaje:
+`{channel.basic_publish(exchange='direct_logs',routing_key=severity, body=message)}`
+
+El script recibe dos argumento, primero, recibe el nombre del "binding" y luego el mensaje que se quiera mandar. Por ejemplo, si se quiere mandar un "Hola" al grupo "General", se debe ejecutar así:
+- `{python productor.py "General" " Hola"}`
+
+El script se realiza de tal forma que, si no recibe ningún parámetro, al ejectuarse en envíe por defecto al grupo "General" un "Mensaje por defecto".
+
+A continuación se muestra el script completo:
+
+![Python productor](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/21Productor_py.png)
+
+Después, se realiza el aprovisionamiento, para ello, se instalan las mismas depedencias que los consumidores y se clona el repositorio donde se encuentra el script a ejecutar.
+
+![Provisionamiento productor](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/22Productor_ansible.png)
+
 ### Evidencias del funcionamiento
+
+Una vez se realiza el `{vagrant up}`, se ejecuta el comando, esta vez, teniendo un consumidor (Consumidor A) ejecutándose para poder verificar que está mandando el mensaje:
+
+![Ejecutar script por defecto](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/23Productor_ejecutando_script.png)
+
+Y el mensaje llega al Consumidor A que está vinculado al binding General.
+![Verificando en un consumidor](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/24Productor_verificando.png)
 
 ## Documentación de las tareas de integración
 
