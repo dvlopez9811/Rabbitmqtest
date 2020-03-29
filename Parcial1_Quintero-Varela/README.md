@@ -230,10 +230,24 @@ Y el mensaje llega al Consumidor A que está vinculado al binding General.
 
 ## Documentación de las tareas de integración
 
-(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/25Integracion_status.png)
-(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/26Integracion_enviando_mensajes.png)
-(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/27Integracion_consumidorA.png)
-(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/28Integracion_consumidorB.png)
+La primera tarea de integración fue realizar el `{vagrant up}` para ejecutar todas las máquinas virtuales.
+
+![Vagrant status](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/25Integracion_status.png)
+
 ### Evidencias de la integración
 
+Ahora, para probarlo, se realiza el envío de los siguentes mensajes, verificando que para cada consumidor lleguen los mensajes que debería recibir.
+![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/26Integracion_enviando_mensajes.png)
+
+Efectivamente, se verfifica:
+- Consumidor A: <br>
+![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/27Integracion_consumidorA.png)
+
+- Consumidor B: <br>
+![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/28Integracion_consumidorB.png)
+
 ## Problemas encontrados y las acciones efectuadas para su solución al aprovisionar la infraestructura y aplicaciones
+
+- Al ejectuar de forma local los scripts, todo funcionó. En el momento de provisionar las máquinas virtuales y tener todo separado, se presentó el problema de acceder remotamente a RabbitMQ. La forma de solucionar esto fue, primero, en el broker eliminar el usuario por defecto (solo podía ser accedido de forma local) y crear un nuevo usuario. Después, en cada uno de los scripts tanto de los consumidores como en el del prodcutor, crear unos parámetros para la autenticación y se puede acceder remotamente al servidor.
+
+- Con el objetivo de realizar una implementación más práctica y automatizada de la aplicación, se propuso, desde el equipo de trabajo, ejecutar el script de consumidores y de productor directamente desde el aprovisionamiento en Ansible. Sin embargo, no se consiguió realizar esto en segundo plano para que la aplicación escuchara los mensajes y se guardaran en un archivo de texto de manera persistente. Por esta razón, se decidió mantener la implementación por medio de ejecuciones manuales de los scripts en cada una de las máquinas virtuales.
