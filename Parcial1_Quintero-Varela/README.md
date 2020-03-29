@@ -95,7 +95,59 @@ Por último, verificamos, accediendo desde el navegador a la dirección IP: `{19
 
 ## Documentación del procedimiento para el aprovisionamiento de los consumidores
 
+Los consumidores son la aplicación que recibe los mensajes desde la cola de RabbitMQ. Para esto, se han definido previamente en Vagrant dos máquinas virtuales: ConsumidorA y ConsumidorB.
+
+El proceso de aprovisionamiento de estas máquinas es el siguiente:
+
+1. Se instala "pip", una aplicación que permite instalar paquetes de Python.
+
+2. Se instala "pika" haciendo uso de pip, ésta es necesaria para hacer uso del protocolo de RabbitMQ.
+
+3. Se instala tambien git, con el objetivo de hacer clonación del repositorio dentro de la máquina.
+
+4. Haciendo uso de git, se clona el repositorio de github {https://github.com/dvlopez9811/Rabbitmqtest.git}, teniendo en cuenta que esta acción debe realizarse solo una vez haya sido instalado git.
+
+5. Para permitir la ejecución de estos scripts, se le otorgan estos permisos al archivo en la carpeta ya clonada.
+
+El aprovisionamiento de la primera de estas máquinas se define de la siguiente forma en el archivo servers.yml dentro de los playbooks de Ansible:
+
+![Aprovisionamiento ConsumidorA](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/12ConsumidorA_ansible.png)
+
+Asi mismo, se realiza el aprovisionamiento del segundo consumidor, ConsumidorB:
+
+![Aprovisionamiento ConsumidorB](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/13ConsumidorB_ansible.png)
+
+Como puede observarse, en el aprovisionamiento se hace la clonación de este repositorio mediante git dentro de estas máquinas. Esto con el objetivo de añadir en ellas los scripts que crean los bindings y reciben los mensajes o exchanges.
+
+Estos archivos contienen la siguiente estructura: 
+
+Consumidor A, con severities definidas como ["Grupo 01","General]:
+
+![Script ConsumidorA](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/14ConsumidorA_py.png)
+
+En el caso del ConsumidorB,las severities son  ["Grupo 02","General]:
+
+![Script ConsumidorB](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/15ConsumidorB_py.png)
+
 ### Evidencias del funcionamiento
+
+Una vez se ejecuta en cada máquina de consumidores el comando {python /src/Parcial1_Quintero-Varela/src/consumidorA.py} o {python /src/Parcial1_Quintero-Varela/src/consumidorB.py} según sea el caso, se establece un "listener" que actúa esperando los mensajes, los que llegan son imprimidos en consola:
+
+![Ejecucion ConsumidorA](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/16ConsumidorA_ejecutar_py.png)
+
+![Ejecucion ConsumidorB](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/17ConsumidorB_ejectuar_py.png)
+
+En la interfaz del servidor de RabbitMQ, puede verificarse que ambos consumidores han sido agregados como queue:
+
+![Verificacion consumidores](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/18Consumidores_verificacion.png)
+
+Por último, también se verifica que el consumidor A se encuentra escuchando los bindings del "Grupo 01" y "General" como se establece en las severities:
+
+![Binding consumidorA](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/20ConsumidorA_binding.png)
+
+Y a su vez, el consumidor B escucha el "Grupo 02" y "General"
+
+![Binding consumidorB](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/19ConsumidorB_binding.png)
 
 ## Documentación del procedimiento para el aprovisionamiento del productor
 
