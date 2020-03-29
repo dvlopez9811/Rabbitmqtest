@@ -71,36 +71,6 @@
       name: rabbitmq-server
       state: restarted
 
-# productor installation
-- hosts: productor
-  gather_facts: yes
-  become: yes
-  become_user: root
-  become_method: sudo
-
-  tasks:
-
-    - name: install pip
-      apt:
-        name: python-pip
-        state: present
-        
-    - name: install pika
-      pip: 
-        name: pika
-    
-    - name: install git
-      apt:
-        name: git
-        state: present
-    
-    - name: python archives | clone repo
-      git:
-        repo: https://github.com/dvlopez9811/Rabbitmqtest.git
-        dest: /src
-        accept_hostkey: no
-      register: git_finished
-
 # consumidorA installation
 - hosts: consumidorA
   gather_facts: yes
@@ -176,3 +146,34 @@
         owner: root
         group: root
         mode: '777'
+
+# productor installation
+- hosts: productor
+  gather_facts: yes
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+
+    - name: install pip
+      apt:
+        name: python-pip
+        state: present
+        
+    - name: install pika
+      pip: 
+        name: pika
+    
+    - name: install git
+      apt:
+        name: git
+        state: present
+    
+    - name: python archives | clone repo
+      git:
+        repo: https://github.com/dvlopez9811/Rabbitmqtest.git
+        dest: /src
+        accept_hostkey: no
+      register: git_finished
+
