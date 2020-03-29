@@ -125,7 +125,7 @@ Consumidor A, con severities definidas como ["Grupo 01","General]:
 
 ![Script ConsumidorA](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/14ConsumidorA_py.png)
 
-En el caso del ConsumidorB,las severities son  ["Grupo 02","General]:
+En el caso del ConsumidorB, las severities son  ["Grupo 02","General]:
 
 ![Script ConsumidorB](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/15ConsumidorB_py.png)
 
@@ -145,7 +145,7 @@ Por último, también se verifica que el consumidor A se encuentra escuchando lo
 
 ![Binding consumidorA](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/20ConsumidorA_binding.png)
 
-Y a su vez, el consumidor B escucha el "Grupo 02" y "General"
+Y a su vez, el consumidor B escucha el "Grupo 02" y "General":
 
 ![Binding consumidorB](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/19ConsumidorB_binding.png)
 
