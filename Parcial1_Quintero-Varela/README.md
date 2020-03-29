@@ -51,17 +51,47 @@ Después, se crean los archivos necesarios para realizar el aprovisionamiento:
 
 ## Documentación del procedimiento para el aprovisionamiento del broker
 
-![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/7Broker_ansible.png)
+EL siguiente paso es aprovisionar la máquina broker con RabbitMQ. 
 
-![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/8Broker_ansible.png)
+EL proceso es el siguiente:
+
+1. En orden de usar el repositorio de RabbitMQ primero se debe agregar la clave de firma RabbitMQ a apt-key. Esto instruirá a apt para confiar en los paquetes firmados por esa clave.
+
+2. Al igual que con todos los repositorios apt de terceros, se debe colocar un archivo que describa el repositorio en el directorio /etc/apt/sources.list.d/.
+
+Los repositorios estándar de Debian y Ubuntu tienden a proporcionar versiones desactualizadas de Erlang/OTP. Team RabbitMQ mantiene un repositorio apto que incluye paquetes de versiones modernas de Erlang/OTP para una serie de distribuciones Debian y Ubuntu de uso común.
+
+3. Por esto, se agrega prime la clave y después, se agregar el repositorio.
+
+4. Se instala RabbitMQ.
+
+![Aprovisionamiento broker](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/7Broker_ansible.png)
+
+5. Se inicia RabbitMQ.
+
+6. El complemento de administración RabbitMQ proporciona una API basada en HTTP para la administración y supervisión de nodos y clústeres RabbitMQ, junto con una interfaz de usuario basada en navegador y una herramienta de línea de comandos, rabbitmqadmin.Para ello, se habilita el plugin.
+
+7. Luego se agrega un nuevo usuario administrador y elimina el usuario predeterminado de RabbitMQ.
+
+8. Por último, se reinicia el servidor de RabbitMQ.
+
+![Más aprovisionamiento RabbitMQ](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/8Broker_ansible.png)
+
+Fuentes:
+[1] https://www.rabbitmq.com/install-debian.html#erlang-repositories
 
 ### Evidencias del funcionamiento
 
-![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/9Broker_ssh.png)
+Una vez se ejecuta el comando  `{vagrant up broker}`, accedemos por ssh:
 
-![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/10Broker_rabbit_satus4.png)
+![Broker SSH](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/9Broker_ssh.png)
 
-![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/11Broker_plugin_management5.png)
+Validamos que se haya realizado un correcto aprovisionamiento y se encuentre el servicio de RabbitMQ:
+
+![Broker status](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/10Broker_rabbit_satus4.png)
+
+Por último, verificamos, accediendo desde el navegador a la dirección IP: `{192.168.56.2.15672}`
+![Broker plugin](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/11Broker_plugin_management5.png)
 
 ## Documentación del procedimiento para el aprovisionamiento de los consumidores
 
