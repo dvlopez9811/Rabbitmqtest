@@ -121,7 +121,50 @@ Como puede observarse, en el aprovisionamiento se hace la clonación de este rep
 
 Estos archivos contienen la siguiente estructura: 
 
-Consumidor A, con severities definidas como ["Grupo 01","General]:
+1. Primero, se importa el paquete pika `{ import pika }`
+
+2. Se establecen las credenciales para acceder al servidor de RabbitMQ, en este caso mediante el usuario 'deploy' y la contraseña 'password': 
+
+`{ credentials = pika.PlainCredentials('deploy', 'password') }`
+
+3. Se establecen los parametros para la conexión al servidor haciendo uso de pika, con la respectiva dirección IP y credenciales.
+A partir de estos se establece la conexión y posteriormente el canal:
+
+`parameters = pika.ConnectionParameters('192.168.56.2',5672,'/', credentials)`
+
+`connection = pika.BlockingConnection(parameters)`
+
+`channel = connection.channel()`
+
+Es importante establecer el tipo de exchanges que se realizaran, para esta conexión serán de tipo directo:
+
+`channel.exchange_declare(exchange='direct_logs', exchange_type='direct')`
+
+`result = channel.queue_declare(queue='', exclusive=True)`
+
+`queue_name = result.method.queue`
+
+4. Se establecen las severities, las cuales definen las colas a las cuales escuchará el consumidor:
+
+`for severity in severities:`
+
+    `channel.queue_bind(`
+    
+        `exchange='direct_logs', queue=queue_name, routing_key=severity)`
+
+5. Finalmente, se pone en funcionamiento el consumidor, imprimiendo en consola los mensajes recibidos:
+
+`def callback(ch, method, properties, body):`
+
+   `print(" [x] %r:%r" % (method.routing_key, body)) `  
+
+`channel.basic_consume(`
+
+   ` queue=queue_name, on_message_callback=callback, auto_ack=True)`
+
+`channel.start_consuming()`
+
+A continuación se muestra el script completo de Consumidor A, con severities definidas como ["Grupo 01","General]:
 
 ![Script ConsumidorA](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/14ConsumidorA_py.png)
 
@@ -187,20 +230,10 @@ Y el mensaje llega al Consumidor A que está vinculado al binding General.
 
 ## Documentación de las tareas de integración
 
-Ahora, se realiza un vagrant up para iniciar todas las máquinas virtuales:
-![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/25Integracion_status.png)
-
+(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/25Integracion_status.png)
+(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/26Integracion_enviando_mensajes.png)
+(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/27Integracion_consumidorA.png)
+(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/28Integracion_consumidorB.png)
 ### Evidencias de la integración
-
-La forma de evidenciar la integración es, primero, enviar mensajes de parte del productor:
-![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/26Integracion_enviando_mensajes.png)
-
-Y verificar que a los consumidores les llegue los mensajes que les debería llegar:
-
-Consumidor A <br>
-![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/27Integracion_consumidorA.png)
-
-Consumidor B <brZ
-![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/28Integracion_consumidorB.png)
 
 ## Problemas encontrados y las acciones efectuadas para su solución al aprovisionar la infraestructura y aplicaciones
