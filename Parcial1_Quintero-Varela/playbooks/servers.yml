@@ -176,4 +176,3 @@
         dest: /src
         accept_hostkey: no
       register: git_finished
-
