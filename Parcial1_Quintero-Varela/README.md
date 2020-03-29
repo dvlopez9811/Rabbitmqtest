@@ -38,7 +38,7 @@ Un “direct Exchange” entrega mensajes a colas en función de una clave de en
 
 Esquema del parcial:
 
-![Esquema](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/Esquema.png)
+![Esquema](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/Esquema.png.png)
 
 
 ## Instalación y configuración de las máquinas virtuales
