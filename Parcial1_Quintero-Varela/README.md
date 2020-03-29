@@ -126,7 +126,7 @@ El proceso de aprovisionamiento de estas máquinas es el siguiente:
 
 3. Se instala tambien git, con el objetivo de hacer clonación del repositorio dentro de la máquina.
 
-4. Haciendo uso de git, se clona el repositorio de github {https://github.com/dvlopez9811/Rabbitmqtest.git}, teniendo en cuenta que esta acción debe realizarse solo una vez haya sido instalado git.
+4. Haciendo uso de git, se clona el repositorio de github https://github.com/dvlopez9811/Rabbitmqtest.git, teniendo en cuenta que esta acción debe realizarse solo una vez haya sido instalado git.
 
 5. Para permitir la ejecución de estos scripts, se le otorgan estos permisos al archivo en la carpeta ya clonada.
 
