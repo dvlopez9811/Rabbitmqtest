@@ -20,6 +20,27 @@ Implemente una arquitectura que contenga:
 - Vagrant
 - Ansible
 
+## Descripción de la solución
+
+RabbitMQ es un software de colas de mensajes también conocido como “message broker” o gestor de colas. Es un software donde se definen las colas a las que se conectan las aplicaciones para transferir uno o muchos mensajes.
+
+Un “message broker” actúa como intermediario para diversos servicios. Se pueden usar para reducir las cargas y los tiempos de entrega de los servidores de aplicaciones web al delegar tareas que normalmente tomarían mucho tiempo o recursos a un tercero que no tiene otro trabajo. 
+
+Existen los siguientes tipos de “exchanges”
+- Directo: el mensaje se enruta a las colas cuya “binding key” coincide exactamente con la clave de enrutamiento del mensaje. Por ejemplo, si la cola está vinculada al “exchange” con la clave de “binding” pdfprocess, un mensaje publicado en el “exchange” con una clave de enrutamiento pdfprocess se enruta a esa cola.
+- Fanout: un intercambio de fanout enruta mensajes a todas las colas vinculadas a él.
+- Topic: El intercambio de temas hace una coincidencia de “wildcard” entre la clave de enrutamiento y el patrón de enrutamiento especificado en el “binding”.
+- Headers: los “exchanges” de encabezados utilizan los atributos del encabezado del mensaje para el enrutamiento.
+
+En este parcial, se debe realizar un direct exchange.
+
+Un “direct Exchange” entrega mensajes a colas en función de una clave de enrutamiento de mensajes. La clave de enrutamiento es un atributo de mensaje agregado al encabezado del mensaje por el productor. Piense en la clave de enrutamiento como una "dirección" que el “exchange” está utilizando para decidir cómo enrutar el mensaje. Un mensaje va a la(s) cola(s) con la clave de “binding” que coincide exactamente con la clave de enrutamiento del mensaje.
+
+Esquema del parcial:
+
+![Esquema](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/Esquema.png)
+
+
 ## Instalación y configuración de las máquinas virtuales
 
 Lo primero que se debe realizar es la instalación y configuración de las máquinas virtuales, para ello utilizamos Vagrant, una herramienta que nos permite crear nuestro entorno de desarrollo de máquinas virtuales.
@@ -248,6 +269,6 @@ Efectivamente, se verfifica:
 
 ## Problemas encontrados y las acciones efectuadas para su solución al aprovisionar la infraestructura y aplicaciones
 
-- Al ejectuar de forma local los scripts, todo funcionó. En el momento de provisionar las máquinas virtuales y tener todo separado, se presentó el problema de acceder remotamente a RabbitMQ. La forma de solucionar esto fue, primero, en el broker eliminar el usuario por defecto (solo podía ser accedido de forma local) y crear un nuevo usuario. Después, en cada uno de los scripts tanto de los consumidores como en el del prodcutor, crear unos parámetros para la autenticación y se puede acceder remotamente al servidor.
+- Al ejecutar de forma local los scripts, todo funcionó. En el momento de provisionar las máquinas virtuales y tener todo separado, se presentó el problema de acceder remotamente a RabbitMQ. La forma de solucionar esto fue, primero, en el broker eliminar el usuario por defecto (solo podía ser accedido de forma local) y crear un nuevo usuario. Después, en cada uno de los scripts tanto de los consumidores como en el del prodcutor, crear unos parámetros para la autenticación y se puede acceder remotamente al servidor.
 
 - Con el objetivo de realizar una implementación más práctica y automatizada de la aplicación, se propuso, desde el equipo de trabajo, ejecutar el script de consumidores y de productor directamente desde el aprovisionamiento en Ansible. Sin embargo, no se consiguió realizar esto en segundo plano para que la aplicación escuchara los mensajes y se guardaran en un archivo de texto de manera persistente. Por esta razón, se decidió mantener la implementación por medio de ejecuciones manuales de los scripts en cada una de las máquinas virtuales.
