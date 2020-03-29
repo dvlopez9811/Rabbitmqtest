@@ -187,10 +187,20 @@ Y el mensaje llega al Consumidor A que está vinculado al binding General.
 
 ## Documentación de las tareas de integración
 
-(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/25Integracion_status.png)
-(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/26Integracion_enviando_mensajes.png)
-(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/27Integracion_consumidorA.png)
-(https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/28Integracion_consumidorB.png)
+Ahora, se realiza un vagrant up para iniciar todas las máquinas virtuales:
+![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/25Integracion_status.png)
+
 ### Evidencias de la integración
+
+La forma de evidenciar la integración es, primero, enviar mensajes de parte del productor:
+![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/26Integracion_enviando_mensajes.png)
+
+Y verificar que a los consumidores les llegue los mensajes que les debería llegar:
+
+Consumidor A <br>
+![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/27Integracion_consumidorA.png)
+
+Consumidor B <brZ
+![](https://github.com/dvlopez9811/Rabbitmqtest/blob/master/Parcial1_Quintero-Varela/imagenes/28Integracion_consumidorB.png)
 
 ## Problemas encontrados y las acciones efectuadas para su solución al aprovisionar la infraestructura y aplicaciones
